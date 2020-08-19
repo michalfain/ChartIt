@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tvAddChart, tvViewCharts;
+    TextView tvAddChart, tvViewCharts, tvContactUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvAddChart = findViewById(R.id.add_chart);
         tvViewCharts = findViewById(R.id.view_charts);
+        tvContactUs = findViewById(R.id.contact_us);
 
         tvAddChart.setOnClickListener(
                 new View.OnClickListener() {
@@ -34,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ViewCharts.class);
                 startActivity(intent);
 
+            }
+        });
+        tvContactUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ContactUs.class);
+                startActivity(intent);
             }
         });
 

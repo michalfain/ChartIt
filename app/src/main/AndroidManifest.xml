@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewCharts"></activity>
+        <activity android:name=".ContactUs"/>
+        <activity android:name=".ViewCharts" />
         <activity android:name=".AddChart" />
         <activity android:name=".MainActivity">
             <intent-filter>
