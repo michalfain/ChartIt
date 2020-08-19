@@ -13,12 +13,6 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:padding="20dp"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="20dp"
         android:text="Your Name:"
         android:textStyle="italic"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
@@ -28,23 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="20dp" />
+        android:padding="20dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="20dp"
+        android:padding="20dp"
         android:text="Your Email:"
         android:textStyle="italic"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
@@ -54,23 +38,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textWebEmailAddress"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="20dp" />
+        android:padding="20dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="20dp"
+        android:padding="20dp"
         android:text="Subject:"
         android:textStyle="italic"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
@@ -80,22 +54,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailSubject"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="20dp" />
+        android:padding="20dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="20dp"
+        android:padding="20dp"
         android:text="Message:"
         android:textStyle="italic"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
@@ -106,12 +70,7 @@
         android:layout_height="wrap_content"
         android:gravity="top"
         android:lines="5"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="20dp" />
+        android:padding="20dp"/>
 
     <Button
         android:id="@+id/btn_send"
