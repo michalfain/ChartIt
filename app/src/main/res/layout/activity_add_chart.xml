@@ -4,9 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:id="@+id/view_root"
     tools:context=".AddChart">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <EditText
+        android:id="@+id/edTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="Title"
+        android:textAlignment="center" />
+
+    </LinearLayout><LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <EditText
+        android:id="@+id/edVerse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="Verse"
+        android:textAlignment="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
     <AutoCompleteTextView
         android:id="@+id/chord1"
@@ -47,4 +79,142 @@
         android:hint="C"
         android:inputType="text"
         android:paddingEnd="10dp" />
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <AutoCompleteTextView
+        android:id="@+id/chord5"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/chord6"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/chord7"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/chord8"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <AutoCompleteTextView
+        android:id="@+id/chord9"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/chord10"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/chord11"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/chord12"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <AutoCompleteTextView
+        android:id="@+id/chord13"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/chord14"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/chord15"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/chord16"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="C"
+        android:inputType="text"
+        android:paddingEnd="10dp" />
+    </LinearLayout>
+
 </LinearLayout>
