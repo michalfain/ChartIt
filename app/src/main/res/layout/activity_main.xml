@@ -15,7 +15,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="160dp"
         android:clickable="true"
-        android:textSize="20dp"
+        android:textSize="26dp"
         android:textColor="@color/textColor"
         android:textStyle="bold"
         android:text="Add Chart" />
@@ -27,7 +27,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:clickable="true"
-        android:textSize="20dp"
+        android:textSize="26dp"
         android:textColor="@color/textColor"
         android:textStyle="bold"
         android:text="View Charts" />
@@ -39,7 +39,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:clickable="true"
-        android:textSize="20dp"
+        android:textSize="26dp"
         android:textColor="@color/textColor"
         android:textStyle="bold"
         android:text="Contact Us" />
