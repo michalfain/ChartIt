@@ -18,12 +18,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddChart extends AppCompatActivity {
-    public static Map<Integer, AutoCompleteTextView> etChordsMap =new HashMap<>();
+    public static Map<Integer, AutoCompleteTextView> etChordsMap = new HashMap<>();
+    EditText etTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_chart);
+        etTitle = findViewById(R.id.ed_title);
 
         String[] chords = {"C", "Cm", "Cdim", "Caug", "Cmaj7", "C7", "Cm7", "CmMaj7", "Cm7b5", "Cdim7",
                 "Cb", "Cbm", "Cbdim", "Cbaug", "Cbmaj7", "Cb7", "Cbm7", "CbmMaj7", "Cbm7b5", "Cbdim7",
@@ -49,11 +51,14 @@ public class AddChart extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, chords);
         for (int i = 1; i < 9; i++) {
-            AutoCompleteTextView echord = (AutoCompleteTextView) findViewById(getResources().getIdentifier("chord" + i, "id", getPackageName()));
-            echord.setThreshold(1);
-            echord.setAdapter(adapter);
-            etChordsMap.put(i, echord);
+            AutoCompleteTextView eChord = (AutoCompleteTextView) findViewById(getResources().getIdentifier("chord" + i, "id", getPackageName()));
+            eChord.setThreshold(1);
+            eChord.setAdapter(adapter);
+            etChordsMap.put(i, eChord);
 
         }
+    }
+    public void save(){
+
     }
 }

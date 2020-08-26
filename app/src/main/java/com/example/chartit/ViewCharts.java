@@ -10,12 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class ViewCharts extends AppCompatActivity {
     ListView listView;
-    String chartsTitle[] = {"My song", "Song", "Sing"};
+    EditText etTitle;
+    ChartsProvider charts = new Charts("my song");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +28,9 @@ public class ViewCharts extends AppCompatActivity {
 
         listView = findViewById(R.id.list_view);
 
-        ListAdapter adapter = new ListAdapter(this, chartsTitle);
+        ListAdapter adapter = new ListAdapter(this, charts.getTitles());
         listView.setAdapter(adapter);
+
     }
 
     class ListAdapter extends ArrayAdapter<String>{
@@ -33,10 +38,10 @@ public class ViewCharts extends AppCompatActivity {
         Context context;
         String chartTitle[];
 
-        ListAdapter(Context context, String chartTitle[]){
+        ListAdapter(Context context, List<String> chartTitle){
             super(context, R.layout.row_layout, chartTitle);
             this.context = context;
-            this.chartTitle = chartTitle;
+            this.chartTitle = chartTitle.toArray(new String[0]);
         }
 
         @NonNull
@@ -45,7 +50,7 @@ public class ViewCharts extends AppCompatActivity {
             LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = layoutInflater.inflate(R.layout.row_layout, parent, false);
             TextView tvChartName = row.findViewById(R.id.tv_chart_name);
-            tvChartName.setText(chartsTitle[position]);
+            tvChartName.setText(charts.getTitles().get(position));
 
             return row;
         }
