@@ -34,7 +34,13 @@ public void sendEmail(View v){
     intent.putExtra(Intent.EXTRA_TEXT, message);
     intent.setType("message/rfc822");
     startActivity(intent);
-} else {
+    etName.setText("");
+    etEmail.setText("");
+    etSubject.setText("");
+    etMessage.setText("");
+            Toast.makeText(ContactUs.this, "Thank you for your feedback!", Toast.LENGTH_LONG).show();
+
+        } else {
             Toast.makeText(ContactUs.this, "Please enter all fields!", Toast.LENGTH_LONG).show();
         }
     }
