@@ -1,9 +1,12 @@
 package com.example.chartit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,7 +62,30 @@ public class AddChart extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_chart_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+switch (item.getItemId()){
+    case R.id.save:
+        save();
+        Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
+    case R.id.reset:
+        resetChart();
+        Toast.makeText(AddChart.this, "Chart was reset", Toast.LENGTH_LONG).show();
+}
+        return super.onOptionsItemSelected(item);
+    }
+
     public void save(){
+        ChartsProvider charts = new Charts(etTitle.getText().toString());
+    }
+    private void resetChart(){
 
     }
 }
