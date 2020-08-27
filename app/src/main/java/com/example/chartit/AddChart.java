@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,6 +86,10 @@ switch (item.getItemId()){
     public void save(){
 
         ChartsProvider charts = new Charts(etTitle.getText().toString());
+        if(!etTitle.getText().toString().isEmpty()){
+            Intent intent = new Intent(AddChart.this, ViewCharts.class);
+
+        }
         Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
     }
     private void resetChart(){
