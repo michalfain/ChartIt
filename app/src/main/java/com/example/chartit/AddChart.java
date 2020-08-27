@@ -1,9 +1,11 @@
 package com.example.chartit;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,18 +76,30 @@ public class AddChart extends AppCompatActivity {
 switch (item.getItemId()){
     case R.id.save:
         save();
-        Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
     case R.id.reset:
         resetChart();
-        Toast.makeText(AddChart.this, "Chart was reset", Toast.LENGTH_LONG).show();
 }
         return super.onOptionsItemSelected(item);
     }
 
     public void save(){
+
         ChartsProvider charts = new Charts(etTitle.getText().toString());
+        Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
     }
     private void resetChart(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddChart.this);
+        alertDialog.setTitle("Are You Sure");
+        alertDialog.setMessage("Reset chart?");
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(AddChart.this, "Chart was reset!", Toast.LENGTH_LONG).show();
 
+            }
+        });
+        alertDialog.setNegativeButton("No", null);
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }
