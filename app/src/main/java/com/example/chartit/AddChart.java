@@ -27,6 +27,7 @@ import java.util.Map;
 public class AddChart extends AppCompatActivity {
     public static Map<Integer, AutoCompleteTextView> etChordsMap = new HashMap<>();
     EditText etTitle;
+    static ChartsProvider charts = new Charts();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,21 +78,23 @@ public class AddChart extends AppCompatActivity {
 switch (item.getItemId()){
     case R.id.save:
         save();
+        break;
+
     case R.id.reset:
         resetChart();
+        break;
 }
         return super.onOptionsItemSelected(item);
     }
 
-    public void save(){
-
-        ChartsProvider charts = new Charts(etTitle.getText().toString());
+    private void save(){
         if(!etTitle.getText().toString().isEmpty()){
-            Intent intent = new Intent(AddChart.this, ViewCharts.class);
-
+            Chart chart = new Chart(etTitle.getText().toString());
+            charts.addTitle(chart.title);
         }
         Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
     }
+
     private void resetChart(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddChart.this);
         alertDialog.setTitle("Are You Sure");

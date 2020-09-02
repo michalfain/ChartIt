@@ -6,4 +6,5 @@ public interface ChartsProvider {
     List<String> getTitles();
     void addTitle(String title);
     void addChords();
+
 }
