@@ -15,13 +15,23 @@ public class Charts implements ChartsProvider{
     }
 
     @Override
+    public String getTitle(int i) {
+        return chartsTitle.get(i);
+    }
+
+    @Override
     public void addTitle(String title) {
 
         chartsTitle.add(title);
     }
 
     @Override
-    public void addChords() {
-
+    public void removeChart(int i) {
+        chartsTitle.remove(i);
     }
+
+//    @Override
+//    public void addChords() {
+//
+//    }
 }

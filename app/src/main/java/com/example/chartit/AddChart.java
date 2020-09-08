@@ -4,30 +4,27 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static com.example.chartit.ViewCharts.charts;
 
 public class AddChart extends AppCompatActivity {
     public static Map<Integer, AutoCompleteTextView> etChordsMap = new HashMap<>();
     EditText etTitle;
-    static ChartsProvider charts = new Charts();
+    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +62,23 @@ public class AddChart extends AppCompatActivity {
             etChordsMap.put(i, eChord);
 
         }
+//        Intent intent = getIntent();
+//        title = intent.getStringExtra("title");
+//        if (etTitle.getText().toString() != null) {
+//            etTitle.setText(etTitle.getText().toString());
+//            setEtChords(title);
+//        } else {
+//            etTitle.setText("");
+//        }
     }
+//    private void setEtChords(String title) {
+//        List<String> etChordsBoard = charts.getTitle(); // TODO: fix it, this will not work!
+//        for(Integer index: etChordsMap.keySet())
+//        {
+//            etChordsMap.get(index).setText(etChordsBoard.get(index - 1));
+//        }
+//
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,11 +101,20 @@ switch (item.getItemId()){
     }
 
     private void save(){
+        List etChords = new ArrayList<>();
+        populateEtChords(etChords);
         if(!etTitle.getText().toString().isEmpty()){
-            Chart chart = new Chart(etTitle.getText().toString());
+            Chart chart = new Chart(etTitle.getText().toString(), etChords);
             charts.addTitle(chart.title);
         }
         Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
+    }
+
+    private void populateEtChords(List etChords) {
+        for(AutoCompleteTextView etChord:etChordsMap.values())
+        {
+            etChords.add(etChord.getText());
+        }
     }
 
     private void resetChart(){
@@ -102,6 +124,7 @@ switch (item.getItemId()){
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                reset();
                 Toast.makeText(AddChart.this, "Chart was reset!", Toast.LENGTH_LONG).show();
 
             }
@@ -109,5 +132,13 @@ switch (item.getItemId()){
         alertDialog.setNegativeButton("No", null);
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    private void reset(){
+        etTitle.setText("");
+        for(AutoCompleteTextView etChord:etChordsMap.values())
+        {
+            etChord.setText("");
+        }
     }
 }
