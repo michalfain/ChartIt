@@ -12,21 +12,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <EditText
-        android:id="@+id/ed_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@null"
-        android:hint="Title"
-        android:textAlignment="center" />
 
-    </LinearLayout><LinearLayout
+        <EditText
+            android:id="@+id/ed_title"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@null"
+            android:hint="Title"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
     <EditText
-        android:id="@+id/edVerse"
+        android:id="@+id/et_verse_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -216,5 +219,201 @@
         android:inputType="text"
         android:paddingEnd="10dp" />
     </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/et_verse_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@null"
+        android:hint="Verse"
+        android:textAlignment="center" />
+</LinearLayout>
+
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+
+<AutoCompleteTextView
+    android:id="@+id/chord17"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord18"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord19"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord20"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+</LinearLayout>
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+
+<AutoCompleteTextView
+    android:id="@+id/chord21"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord22"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord23"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord24"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+</LinearLayout>
+
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+
+<AutoCompleteTextView
+    android:id="@+id/chord25"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord26"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord27"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord28"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+</LinearLayout>
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+
+<AutoCompleteTextView
+    android:id="@+id/chord29"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord30"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord31"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+
+<AutoCompleteTextView
+    android:id="@+id/chord32"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:hint="C"
+    android:inputType="text"
+    android:paddingEnd="10dp" />
+</LinearLayout>
 
 </LinearLayout>
