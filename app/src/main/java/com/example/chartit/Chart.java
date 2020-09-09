@@ -1,12 +1,13 @@
 package com.example.chartit;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Chart {
-    Chart(String title, List<String> chord){
+public class Chart extends Charts{
+    Chart(String title, List<String> chords){
         this.title = title;
-        this.chord = chord;
+        this.chords = chords;
     }
     String title;
-    List<String> chord;
+    List<String> chords;
 }

@@ -7,6 +7,7 @@ public interface ChartsProvider {
     String getTitle(int i);
     void addTitle(String title);
     void removeChart(int i);
-//    void addChords();
-
+    void addChart(Chart chart);
+    List<String> getChords(int i);
+//    int getIndex(Chart chart);
 }

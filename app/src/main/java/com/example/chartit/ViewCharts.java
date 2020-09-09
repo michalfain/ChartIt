@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -26,7 +29,6 @@ import java.util.Map;
 
 public class ViewCharts extends AppCompatActivity {
     ListView listView;
-//    static Map<String, List<String>> chart = new HashMap<>();
     static ChartsProvider charts = new Charts();
 
     @Override
@@ -42,11 +44,12 @@ public class ViewCharts extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ViewCharts.this, AddChart.class);
-//                intent.putExtra("title", charts.getTitle(i));
-//                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
-//                        "com.example.chartit", Context.MODE_PRIVATE);
-//                HashSet<String> set = new HashSet<String>(ViewCharts.chart.keySet());
-//                sharedPreferences.edit().putStringSet("charts", set).apply();
+                intent.putExtra("title", charts.getTitle(i));
+                intent.putExtra("index", i);
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.chartit"
+                        , Context.MODE_PRIVATE);
+                HashSet<String> set = new HashSet<String>(charts.getTitles());
+                sharedPreferences.edit().putStringSet("charts", set).apply();
                 startActivity(intent);
             }
         });
@@ -62,11 +65,6 @@ public class ViewCharts extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 charts.removeChart(position);
                                 adapter.notifyDataSetChanged();
-
-                                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.anotheone"
-                                        , Context.MODE_PRIVATE);
-//                                HashSet<String> set = new HashSet<String>(ViewCharts.charts.keySet());
-//                                sharedPreferences.edit().putStringSet("charts", set).apply();
                             }
                         })
                         .setNegativeButton("NO!", null)
@@ -77,12 +75,12 @@ public class ViewCharts extends AppCompatActivity {
     }
 
 
-    class ListAdapter extends ArrayAdapter<String>{
+    class ListAdapter extends ArrayAdapter<String> {
 
         Context context;
         String chartTitle[];
 
-        ListAdapter(Context context, List<String> chartTitle){
+        ListAdapter(Context context, List<String> chartTitle) {
             super(context, R.layout.row_layout, chartTitle);
             this.context = context;
             this.chartTitle = chartTitle.toArray(new String[0]);
@@ -98,5 +96,7 @@ public class ViewCharts extends AppCompatActivity {
 
             return row;
         }
+
     }
 }
+

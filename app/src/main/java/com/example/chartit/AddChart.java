@@ -64,23 +64,25 @@ public class AddChart extends AppCompatActivity {
             etChordsMap.put(i, eChord);
 
         }
-//        Intent intent = getIntent();
-//        title = intent.getStringExtra("title");
-//        if (etTitle.getText().toString() != null) {
-//            etTitle.setText(etTitle.getText().toString());
-//            setEtChords(title);
-//        } else {
-//            etTitle.setText("");
-//        }
+        Intent intent = getIntent();
+        title = intent.getStringExtra("title");
+        if (title != null) {
+            etTitle.setText(title);
+            setEtChords((intent.getIntExtra("index",-1)));
+        } else {
+            etTitle.setText("");
+        }
     }
-//    private void setEtChords(String title) {
-//        List<String> etChordsBoard = charts.getTitle(); // TODO: fix it, this will not work!
-//        for(Integer index: etChordsMap.keySet())
-//        {
-//            etChordsMap.get(index).setText(etChordsBoard.get(index - 1));
-//        }
-//
-//    }
+    private void setEtChords(int i) {
+        List<String> etChordsBoard = charts.getChords(i);
+        for(Integer index: etChordsMap.keySet())
+        {
+            etChordsMap.get(index).setText(etChordsBoard.get(index - 1));
+        }
+
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -108,8 +110,13 @@ switch (item.getItemId()){
         if(!etTitle.getText().toString().isEmpty()){
             Chart chart = new Chart(etTitle.getText().toString(), etChords);
             charts.addTitle(chart.title);
+            charts.addChart(chart);
+            Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
+
+        }else {
+            Toast.makeText(AddChart.this, "Please enter chart's title", Toast.LENGTH_LONG).show();
+
         }
-        Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
     }
 
     private void populateEtChords(List etChords) {
