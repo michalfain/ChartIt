@@ -24,7 +24,7 @@ import static com.example.chartit.ViewCharts.charts;
 public class AddChart extends AppCompatActivity {
     public static Map<Integer, AutoCompleteTextView> etChordsMap = new HashMap<>();
     EditText etTitle, etVerse1, etVerse2;
-    String title;
+    String title, verse1, verse2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,19 @@ public class AddChart extends AppCompatActivity {
         } else {
             etTitle.setText("");
         }
+        verse1 = intent.getStringExtra("verse1");
+        if(verse1 != null){
+            etVerse1.setText(verse1);
+        }else {
+            etVerse1.setText("");
+        }
+        verse2 = intent.getStringExtra("verse2");
+        if(verse2 != null){
+            etVerse2.setText(verse2);
+        }else {
+            etVerse2.setText("");
+        }
+
     }
     private void setEtChords(int i) {
         List<String> etChordsBoard = charts.getChords(i);
@@ -106,9 +119,20 @@ switch (item.getItemId()){
 
     private void save(){
         List etChords = new ArrayList<>();
+        String verse1, verse2;
+        if(etVerse1.getText().toString().isEmpty()){
+            verse1 = "";
+        }else {
+            verse1 = etVerse1.getText().toString();
+        }
+        if(etVerse2.getText().toString().isEmpty()){
+            verse2 = "";
+        }else {
+            verse2 = etVerse1.getText().toString();
+        }
         populateEtChords(etChords);
         if(!etTitle.getText().toString().isEmpty()){
-            Chart chart = new Chart(etTitle.getText().toString(), etChords);
+            Chart chart = new Chart(etTitle.getText().toString(), verse1, verse2, etChords);
             charts.addTitle(chart.title);
             charts.addChart(chart);
             Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();

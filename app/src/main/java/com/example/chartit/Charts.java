@@ -43,10 +43,15 @@ public class Charts implements ChartsProvider{
 
         return allCharts.get(i).chords;
     }
-//    @Override
-//    public int getIndex(Chart chart) {
-//
-//        return allCharts.indexOf(chart.title);
-//    }
+
+    @Override
+    public String getVerse1(int i) {
+        return allCharts.get(i).verse1;
+    }
+
+    @Override
+    public String getVerse2(int i) {
+        return allCharts.get(i).verse2;
+    }
 
 }

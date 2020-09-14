@@ -9,5 +9,6 @@ public interface ChartsProvider {
     void removeChart(int i);
     void addChart(Chart chart);
     List<String> getChords(int i);
-//    int getIndex(Chart chart);
+    String getVerse1(int i);
+    String getVerse2(int i);
 }

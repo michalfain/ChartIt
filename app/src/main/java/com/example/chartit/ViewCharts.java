@@ -45,6 +45,8 @@ public class ViewCharts extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ViewCharts.this, AddChart.class);
                 intent.putExtra("title", charts.getTitle(i));
+                intent.putExtra("verse1", charts.getVerse1(i));
+                intent.putExtra("verse2", charts.getVerse2(i));
                 intent.putExtra("index", i);
                 SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.chartit"
                         , Context.MODE_PRIVATE);
