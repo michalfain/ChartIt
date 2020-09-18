@@ -4,9 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -16,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -84,7 +89,6 @@ public class AddChart extends AppCompatActivity {
         }else {
             etVerse2.setText("");
         }
-
     }
     private void setEtChords(int i) {
         List<String> etChordsBoard = charts.getChords(i);
@@ -94,8 +98,6 @@ public class AddChart extends AppCompatActivity {
         }
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -135,6 +137,7 @@ switch (item.getItemId()){
             Chart chart = new Chart(etTitle.getText().toString(), verse1, verse2, etChords);
             charts.addTitle(chart.title);
             charts.addChart(chart);
+
             Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
 
         }else {

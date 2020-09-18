@@ -30,6 +30,8 @@ import java.util.Map;
 public class ViewCharts extends AppCompatActivity {
     ListView listView;
     static ChartsProvider charts = new Charts();
+    String title, verse1, verse2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,22 @@ public class ViewCharts extends AppCompatActivity {
         setContentView(R.layout.activity_view_charts);
 
         listView = findViewById(R.id.list_view);
+        final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.chartit"
+                , Context.MODE_PRIVATE);
+                HashSet<String> set2 = (HashSet<String>)sharedPreferences.getStringSet("Chart List", null);
+
+        if(set2 != null){
+            for(String title : set2){
+                charts.addTitle(title);
+            }
+        }else {
+            charts.getTitles();
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet("Chart List", set2).apply();
+        editor.commit();
+
+//        sharedPreferences = getSharedPreferences("new chart", Context.MODE_PRIVATE);
 
         final ListAdapter adapter = new ListAdapter(this, charts.getTitles());
         listView.setAdapter(adapter);
@@ -44,14 +62,21 @@ public class ViewCharts extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ViewCharts.this, AddChart.class);
-                intent.putExtra("title", charts.getTitle(i));
-                intent.putExtra("verse1", charts.getVerse1(i));
-                intent.putExtra("verse2", charts.getVerse2(i));
+                title = charts.getTitle(i);
+                verse1 = charts.getVerse1(i);
+                verse2 = charts.getVerse2(i);
+                intent.putExtra("title", title);
+                intent.putExtra("verse1",verse1);
+                intent.putExtra("verse2", verse2);
                 intent.putExtra("index", i);
-                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.chartit"
-                        , Context.MODE_PRIVATE);
-                HashSet<String> set = new HashSet<String>(charts.getTitles());
-                sharedPreferences.edit().putStringSet("charts", set).apply();
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.chartit", Context.MODE_PRIVATE);
+                HashSet<String> set = new HashSet<>(charts.getTitles());
+                sharedPreferences.edit().putStringSet("Chart List", set).apply();
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                editor.putString("title", title);
+//                editor.putString("verse1", verse1);
+//                editor.putString("verse2", verse2);
+//                editor.commit();
                 startActivity(intent);
             }
         });
@@ -67,6 +92,10 @@ public class ViewCharts extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 charts.removeChart(position);
                                 adapter.notifyDataSetChanged();
+                                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.chartit"
+                                        , Context.MODE_PRIVATE);
+                                HashSet<String> set = new HashSet<>(charts.getTitles());
+                                sharedPreferences.edit().putStringSet("Chart List", set).apply();
                             }
                         })
                         .setNegativeButton("NO!", null)
@@ -74,6 +103,7 @@ public class ViewCharts extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
 
