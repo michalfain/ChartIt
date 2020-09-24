@@ -11,29 +11,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.google.gson.Gson;
+
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 public class ViewCharts extends AppCompatActivity {
     ListView listView;
-    static ChartsProvider charts = new Charts();
-    String title, verse1, verse2;
-    static ArrayList<String> chartsList = new ArrayList<>();
-
-
+    Chart chart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,39 +38,31 @@ public class ViewCharts extends AppCompatActivity {
         HashSet<String> set2 = (HashSet<String>) sharedPreferences.getStringSet("Chart List", null);
 
         if (set2 != null) {
-            chartsList.addAll(set2);
-            for(String title : chartsList){
-                charts.addTitle(title);
+            Charts.getChartsTitles().addAll(set2);
             }
-            }
-
-            SharedPreferences.Editor editor = sharedPreferences.edit();
+            final SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putStringSet("Chart List", set2).apply();
             editor.commit();
 
-//        sharedPreferences = getSharedPreferences("new chart", Context.MODE_PRIVATE);
-
-            final ListAdapter adapter = new ListAdapter(this, charts.getTitles());
+            final ListAdapter adapter = new ListAdapter(this, Charts.getChartsTitles());
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent(ViewCharts.this, AddChart.class);
-                    title = charts.getTitle(i);
-                    verse1 = charts.getVerse1(i);
-                    verse2 = charts.getVerse2(i);
-                    intent.putExtra("title", title);
-                    intent.putExtra("verse1", verse1);
-                    intent.putExtra("verse2", verse2);
                     intent.putExtra("index", i);
+                    Chart c = new Chart(Charts.getTitle(i), Charts.getVerse1(i), Charts.getVerse2(i), Charts.getChords(i));
+                    intent.putExtra("chart",c);
                     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.chartit", Context.MODE_PRIVATE);
-                    HashSet<String> set = new HashSet<>(charts.getTitles());
+                    HashSet<String> set = new HashSet<>(Charts.getChartsTitles());
                     sharedPreferences.edit().putStringSet("Chart List", set).apply();
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putString("title", title);
-//                editor.putString("verse1", verse1);
-//                editor.putString("verse2", verse2);
-//                editor.commit();
+                    Gson gson = new Gson();
+                    String myChart = gson.toJson(c);
+                    editor.putString("chart", myChart);
+                    editor.commit();
+                    String chartData = sharedPreferences.getString("chart", null);
+                    Chart sfChart = gson.fromJson(chartData, Chart.class);
+                    Charts.addChart(sfChart);
                     startActivity(intent);
                 }
             });
@@ -92,12 +76,14 @@ public class ViewCharts extends AppCompatActivity {
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    charts.removeChart(position);
+                                    Charts.removeChart(position);
                                     adapter.notifyDataSetChanged();
                                     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.chartit"
                                             , Context.MODE_PRIVATE);
-                                    HashSet<String> set = new HashSet<>(charts.getTitles());
+                                    HashSet<String> set = new HashSet<>(Charts.getChartsTitles());
                                     sharedPreferences.edit().putStringSet("Chart List", set).apply();
+                                    AddChart.allChartsDetails.remove(Charts.getTitle(position));
+                                    Charts.getChartsTitles().remove(Charts.getTitle(position));
                                 }
                             })
                             .setNegativeButton("NO!", null)
@@ -105,11 +91,7 @@ public class ViewCharts extends AppCompatActivity {
                     return true;
                 }
             });
-
         }
-
-
-
         class ListAdapter extends ArrayAdapter<String> {
 
             Context context;
@@ -127,7 +109,7 @@ public class ViewCharts extends AppCompatActivity {
                 LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View row = layoutInflater.inflate(R.layout.row_layout, parent, false);
                 TextView tvChartName = row.findViewById(R.id.tv_chart_name);
-                tvChartName.setText(charts.getTitles().get(position));
+                tvChartName.setText(Charts.getChartsTitles().get(position));
 
                 return row;
             }

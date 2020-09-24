@@ -2,56 +2,55 @@ package com.example.chartit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class Charts implements ChartsProvider{
+public final class Charts{
 
-    private List<String> chartsTitle = new ArrayList<String>();
-    private List<Chart> allCharts = new ArrayList<Chart>();
+   private static List<String> chartsTitle;
+   private static List<Chart> allCharts;
+
+    public static List<Chart> getAllCharts() {
+        if(allCharts==null)
+        {
+            allCharts=new ArrayList<Chart>();
+        }
+        return allCharts;
+    }
 
 
-    @Override
-    public List<String> getTitles() {
-
+     public static  List<String> getChartsTitles() {
+        if (chartsTitle == null) {
+            chartsTitle = new ArrayList<>();
+        }
         return chartsTitle;
     }
-
-    @Override
-    public String getTitle(int i) {
-
-        return chartsTitle.get(i);
+     public static String getTitle(int i) {
+        return getChartsTitles().get(i);
     }
 
-    @Override
-    public void addTitle(String title) {
-
-        chartsTitle.add(title);
+     public static void addTitle(String title) {
+         getChartsTitles().add(title);
     }
 
-    @Override
-    public void removeChart(int i) {
 
-        chartsTitle.remove(i);
+    public static void removeChart(int i) {
+        getChartsTitles().remove(i);
     }
 
-    @Override
-    public void addChart(Chart chart) {
-        allCharts.add(chart);
+    public static void addChart(Chart chart) {
+
+        getAllCharts().add(chart);
     }
 
-    @Override
-    public List<String> getChords(int i) {
-
-        return allCharts.get(i).chords;
+    public static Map<Integer, String> getChords(int i) {
+        return getAllCharts().get(i).getChords();
     }
 
-    @Override
-    public String getVerse1(int i) {
-        return allCharts.get(i).verse1;
+    public static String getVerse1(int i) {
+        return getAllCharts().get(i).getVerse1();
     }
 
-    @Override
-    public String getVerse2(int i) {
-        return allCharts.get(i).verse2;
+    public static String getVerse2(int i) {
+        return getAllCharts().get(i).getVerse2();
     }
-
 }

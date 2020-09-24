@@ -4,32 +4,30 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.chartit.ViewCharts.charts;
 
 public class AddChart extends AppCompatActivity {
     public static Map<Integer, AutoCompleteTextView> etChordsMap = new HashMap<>();
     EditText etTitle, etVerse1, etVerse2;
-    String title, verse1, verse2;
+    static Map allChartsDetails = new HashMap();
+    Chart chartFromIntent;
+    Map selectedChordsList = new HashMap<Integer,String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,32 +64,31 @@ public class AddChart extends AppCompatActivity {
             AutoCompleteTextView eChord = (AutoCompleteTextView) findViewById(getResources().getIdentifier("chord" + i, "id", getPackageName()));
             eChord.setThreshold(1);
             eChord.setAdapter(adapter);
+            eChord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String item = adapterView.getItemAtPosition(i).toString();
+                    selectedChordsList.put(i,item);
+//                    Toast.makeText(AddChart.this, "this was was clicked " + item, Toast.LENGTH_LONG).show();
+                }
+            });
             etChordsMap.put(i, eChord);
-
         }
         Intent intent = getIntent();
-        title = intent.getStringExtra("title");
-        if (title != null) {
-            etTitle.setText(title);
-            setEtChords((intent.getIntExtra("index",-1)));
-        } else {
-            etTitle.setText("");
+        chartFromIntent = (Chart) intent.getSerializableExtra("chart");
+        if (chartFromIntent != null && !chartFromIntent.isEmpty(chartFromIntent)) {
+            etTitle.setText(chartFromIntent.getTitle());
+            setEtChords((intent.getIntExtra("index", -1)));
+            etVerse1.setText(chartFromIntent.getVerse1());
+            etVerse2.setText(chartFromIntent.getVerse2());
         }
-        verse1 = intent.getStringExtra("verse1");
-        if(verse1 != null){
-            etVerse1.setText(verse1);
-        }else {
-            etVerse1.setText("");
-        }
-        verse2 = intent.getStringExtra("verse2");
-        if(verse2 != null){
-            etVerse2.setText(verse2);
-        }else {
-            etVerse2.setText("");
-        }
+//        else
+//        {
+//
+//        }
     }
     private void setEtChords(int i) {
-        List<String> etChordsBoard = charts.getChords(i);
+        Map<Integer, String> etChordsBoard = Charts.getChords(i);
         for(Integer index: etChordsMap.keySet())
         {
             etChordsMap.get(index).setText(etChordsBoard.get(index - 1));
@@ -120,29 +117,23 @@ switch (item.getItemId()){
     }
 
     private void save(){
-        List etChords = new ArrayList<>();
-        String verse1, verse2;
-        if(etVerse1.getText().toString().isEmpty()){
-            verse1 = "";
-        }else {
-            verse1 = etVerse1.getText().toString();
-        }
-        if(etVerse2.getText().toString().isEmpty()){
-            verse2 = "";
-        }else {
-            verse2 = etVerse1.getText().toString();
-        }
-        populateEtChords(etChords);
-        if(!etTitle.getText().toString().isEmpty()){
-            Chart chart = new Chart(etTitle.getText().toString(), verse1, verse2, etChords);
-            charts.addTitle(chart.title);
-            charts.addChart(chart);
-
+        if(!etTitle.getText().toString().isEmpty()) {
+            Chart chart = new Chart();
+            chart.setTitle(etTitle.getText().toString());
+            if (!etVerse1.getText().toString().isEmpty()) {
+                chart.setVerse1(etVerse1.getText().toString());
+            }
+            if (!etVerse2.getText().toString().isEmpty()) {
+                chart.setVerse2(etVerse2.getText().toString());
+            }
+            chart.setChords(selectedChordsList);
+            Charts.addTitle(chart.getTitle());
+            Charts.addChart(chart);
+            allChartsDetails.put(chart.getTitle(), chart);
             Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
-
-        }else {
+        }
+        else {
             Toast.makeText(AddChart.this, "Please enter chart's title", Toast.LENGTH_LONG).show();
-
         }
     }
 
