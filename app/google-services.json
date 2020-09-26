@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "70447013402",
+    "firebase_url": "https://chartit-1dc3a.firebaseio.com",
+    "project_id": "chartit-1dc3a",
+    "storage_bucket": "chartit-1dc3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70447013402:android:de5633dbff41d440497ba3",
+        "android_client_info": {
+          "package_name": "com.example.chartit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70447013402-rjk88mej8e80m43t5995ur0qvrandqrv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDykASGwvWKXgkNzu72au96Yw8eAcp9M4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70447013402-rjk88mej8e80m43t5995ur0qvrandqrv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

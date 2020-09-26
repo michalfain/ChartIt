@@ -40,6 +40,7 @@ public class ViewCharts extends AppCompatActivity {
         if (set2 != null) {
             Charts.getChartsTitles().addAll(set2);
             }
+
             final SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putStringSet("Chart List", set2).apply();
             editor.commit();
