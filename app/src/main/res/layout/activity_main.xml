@@ -6,14 +6,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg"
+    android:paddingTop="20.0dp"
     tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_not_verified"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:lineSpacingExtra="18sp"
+        android:paddingBottom="10dp"
+        android:text="Email is NOT verified!"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_verify"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_button"
+        android:text="Verify now!"
+        android:visibility="gone" />
+
 
     <TextView
         android:id="@+id/add_chart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="160dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
         android:clickable="true"
         android:textSize="26dp"
         android:textColor="@color/textColor"

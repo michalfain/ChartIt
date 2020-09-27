@@ -8,12 +8,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvAddChart, tvViewCharts, tvContactUs;
+    Button btnVerify;
+    TextView tvNotVerify;
+    FirebaseAuth fbAuth;
+    String userId;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +33,34 @@ public class MainActivity extends AppCompatActivity {
         tvAddChart = findViewById(R.id.add_chart);
         tvViewCharts = findViewById(R.id.view_charts);
         tvContactUs = findViewById(R.id.contact_us);
+        btnVerify = findViewById(R.id.btn_verify);
+        tvNotVerify = findViewById(R.id.tv_not_verified);
+        fbAuth = FirebaseAuth.getInstance();
+        userId = fbAuth.getCurrentUser().getUid();
+        user = fbAuth.getCurrentUser();
+
+        if(!user.isEmailVerified()){
+            btnVerify.setVisibility(View.VISIBLE);
+            tvNotVerify.setVisibility(View.VISIBLE);
+            btnVerify.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(MainActivity.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(MainActivity.this, "ERROR! " + e.getMessage(), Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+            });
+        }else btnVerify.setVisibility(View.GONE);
+         tvNotVerify.setVisibility(View.GONE);
 
         tvAddChart.setOnClickListener(
                 new View.OnClickListener() {
