@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(MainActivity.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(MainActivity.this, Login.class));
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -59,9 +60,10 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             });
-        }else btnVerify.setVisibility(View.GONE);
-         tvNotVerify.setVisibility(View.GONE);
-
+        }else {
+            btnVerify.setVisibility(View.GONE);
+            tvNotVerify.setVisibility(View.GONE);
+        }
         tvAddChart.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
