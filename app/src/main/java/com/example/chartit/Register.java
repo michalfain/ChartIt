@@ -1,6 +1,7 @@
 package com.example.chartit;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -32,6 +33,8 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         etFullName = findViewById(R.id.et_full_name);
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);

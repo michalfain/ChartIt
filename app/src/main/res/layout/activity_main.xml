@@ -38,10 +38,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:clickable="true"
-        android:textSize="26dp"
+        android:text="Add Chart"
         android:textColor="@color/textColor"
-        android:textStyle="bold"
-        android:text="Add Chart" />
+        android:textSize="26dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/view_charts"
@@ -50,10 +50,10 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:clickable="true"
-        android:textSize="26dp"
+        android:text="View Charts"
         android:textColor="@color/textColor"
-        android:textStyle="bold"
-        android:text="View Charts" />
+        android:textSize="26dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/contact_us"
@@ -62,9 +62,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:clickable="true"
-        android:textSize="26dp"
+        android:text="Contact Us"
         android:textColor="@color/textColor"
-        android:textStyle="bold"
-        android:text="Contact Us" />
+        android:textSize="26dp"
+        android:textStyle="bold" />
 
 </LinearLayout>

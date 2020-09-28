@@ -1,5 +1,6 @@
 package com.example.chartit;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,6 +18,8 @@ public class ContactUs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         etName = findViewById(R.id.et_name);
         etEmail = findViewById(R.id.et_email);
         etSubject = findViewById(R.id.et_subject);

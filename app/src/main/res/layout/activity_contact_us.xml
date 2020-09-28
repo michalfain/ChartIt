@@ -16,6 +16,7 @@
         android:layout_margin="20dp"
         android:background="@drawable/bg_round"
         android:hint="Your Name"
+        android:textColorHint="@color/textColor"
         android:inputType="textPersonName"
         android:padding="20dp" />
 
@@ -27,6 +28,7 @@
         android:layout_margin="20dp"
         android:background="@drawable/bg_round"
         android:hint="Your Email"
+        android:textColorHint="@color/textColor"
         android:inputType="textWebEmailAddress"
         android:padding="20dp" />
 
@@ -37,6 +39,7 @@
         android:layout_margin="20dp"
         android:background="@drawable/bg_round"
         android:hint="Subject"
+        android:textColorHint="@color/textColor"
         android:inputType="textEmailSubject"
         android:padding="20dp" />
 
@@ -48,6 +51,7 @@
         android:background="@drawable/bg_round"
         android:gravity="top"
         android:hint="Your Massage"
+        android:textColorHint="@color/textColor"
         android:lines="10"
         android:padding="20dp" />
 
@@ -60,8 +64,9 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded_button"
-        android:text="send"
         android:onClick="sendEmail"
+        android:text="send"
+        android:textColor="@color/textColor"
         android:textSize="30sp" />
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.chartit;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,6 +35,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         etLoginEmail = findViewById(R.id.et_login_email);
         etLoginPassword = findViewById(R.id.et_login_password);
         btnLogin = findViewById(R.id.btn_login);
