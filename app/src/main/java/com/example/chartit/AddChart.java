@@ -16,6 +16,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +32,10 @@ public class AddChart extends AppCompatActivity {
     Chart chartFromIntent;
     Map selectedChordsList = new HashMap<Integer, String>();
     String title, verse1, verse2;
+    FirebaseAuth fbAuth;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
+
 
 
     @Override
@@ -37,6 +45,10 @@ public class AddChart extends AppCompatActivity {
         etTitle = findViewById(R.id.ed_title);
         etVerse1 = findViewById(R.id.et_verse_1);
         etVerse2 = findViewById(R.id.et_verse_2);
+        fbAuth = FirebaseAuth.getInstance();
+        title = etTitle.getText().toString();
+        verse1 = etVerse1.getText().toString();
+        verse2 = etVerse2.getText().toString();
 
         String[] chords = {"C", "Cm", "Cdim", "Caug", "Cmaj7", "C7", "Cm7", "CmMaj7", "Cm7b5", "Cdim7",
                 "Cb", "Cbm", "Cbdim", "Cbaug", "Cbmaj7", "Cb7", "Cbm7", "CbmMaj7", "Cbm7b5", "Cbdim7",
@@ -78,9 +90,6 @@ public class AddChart extends AppCompatActivity {
         Intent intent = getIntent();
         chartFromIntent = (Chart) intent.getSerializableExtra("chart");
         if (chartFromIntent != null) {// && !chartFromIntent.isEmpty(chartFromIntent)
-            title = etTitle.getText().toString();
-            verse1 = etVerse1.getText().toString();
-            verse2 = etVerse2.getText().toString();
             intent.putExtra("title", title);
             intent.putExtra("verse1", verse1);
             intent.putExtra("verse2", verse2);
@@ -134,6 +143,10 @@ switch (item.getItemId()){
             Charts.addTitle(chart.getTitle());
             Charts.addChart(chart);
             allChartsDetails.put(chart.getTitle(), chart);
+
+            rootNode = FirebaseDatabase.getInstance();
+            reference = rootNode.getReference("Users").child("userCharts");
+            reference.setValue(chart);
             Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
         }
         else {
