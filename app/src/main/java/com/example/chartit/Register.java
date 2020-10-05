@@ -88,7 +88,7 @@ public class Register extends AppCompatActivity {
                     return;
                 }
                 rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("Users");
+                reference = rootNode.getReference(Constants.users);
                 FireBaseHelperClass helperClass = new FireBaseHelperClass(fullName, email, defaultChart);
                 reference.setValue(helperClass);
                 progressBar.setVisibility(View.VISIBLE);

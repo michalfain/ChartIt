@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 public class ContactUs extends AppCompatActivity {
     EditText etName, etEmail, etSubject, etMessage;
-    String myEmail = "michelle.fain@gmail.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,7 @@ public void sendEmail(View v){
     String message = etName.getText().toString() + " " + etMessage.getText().toString() + " "
             + etEmail.getText().toString();
     Intent intent = new Intent(Intent.ACTION_SEND);
-    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"michelle.fain@gmail.com"});
+    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{Constants.myEmail});
     intent.putExtra(Intent.EXTRA_SUBJECT, etSubject.getText().toString());
     intent.putExtra(Intent.EXTRA_TEXT, message);
     intent.setType("message/rfc822");

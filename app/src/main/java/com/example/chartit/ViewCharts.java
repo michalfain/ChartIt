@@ -26,6 +26,7 @@ import java.util.List;
 public class ViewCharts extends AppCompatActivity {
     ListView listView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +51,10 @@ public class ViewCharts extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent(ViewCharts.this, AddChart.class);
-                    intent.putExtra("index", i);
-                    intent.putExtra("title", Charts.getTitle(i));
-                    intent.putExtra("verse1", Charts.getVerse1(i));
-                    intent.putExtra("verse2", Charts.getVerse2(i));
+                    intent.putExtra(Constants.index, i);
+                    intent.putExtra(Constants.title, Charts.getTitle(i));
+                    intent.putExtra(Constants.verse1, Charts.getVerse1(i));
+                    intent.putExtra(Constants.verse2, Charts.getVerse2(i));
 //                    Chart c = new Chart(Charts.getTitle(i), Charts.getVerse1(i), Charts.getVerse2(i), Charts.getChords(i));
 //                    intent.putExtra("chart", c);
 //                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.chartit", Context.MODE_PRIVATE);
@@ -84,7 +85,7 @@ public class ViewCharts extends AppCompatActivity {
                                     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("com.example.chartit"
                                             , Context.MODE_PRIVATE);
                                     HashSet<String> set = new HashSet<>(Charts.getChartsTitles());
-                                    sharedPreferences.edit().putStringSet("Chart List", set).apply();
+                                    sharedPreferences.edit().putStringSet(Constants.chartList, set).apply();
 //                                    AddChart.allChartsDetails.remove(Charts.getTitle(position));
                                     Charts.getChartsTitles().remove(Charts.getTitle(position));
                                 }

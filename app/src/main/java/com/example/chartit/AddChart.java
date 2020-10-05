@@ -88,13 +88,13 @@ public class AddChart extends AppCompatActivity {
             etChordsMap.put(i, eChord);
         }
         Intent intent = getIntent();
-        chartFromIntent = (Chart) intent.getSerializableExtra("chart");
+        chartFromIntent = (Chart) intent.getSerializableExtra(Constants.userCharts);
         if (chartFromIntent != null) {// && !chartFromIntent.isEmpty(chartFromIntent)
-            intent.putExtra("title", title);
-            intent.putExtra("verse1", verse1);
-            intent.putExtra("verse2", verse2);
+            intent.putExtra(Constants.title, title);
+            intent.putExtra(Constants.verse1, verse1);
+            intent.putExtra(Constants.verse2, verse2);
 //            etTitle.setText(chartFromIntent.getTitle());
-            setEtChords((intent.getIntExtra("index", -1)));
+            setEtChords((intent.getIntExtra(Constants.index, -1)));
 //            etVerse1.setText(chartFromIntent.getVerse1());
 //            etVerse2.setText(chartFromIntent.getVerse2());
 //            chartFromIntent = (Chart) intent.getSerializableExtra("chart");
@@ -145,7 +145,7 @@ switch (item.getItemId()){
             allChartsDetails.put(chart.getTitle(), chart);
 
             rootNode = FirebaseDatabase.getInstance();
-            reference = rootNode.getReference("Users").child("userCharts");
+            reference = rootNode.getReference(Constants.users).child(Constants.userCharts);
             reference.setValue(chart);
             Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
         }
