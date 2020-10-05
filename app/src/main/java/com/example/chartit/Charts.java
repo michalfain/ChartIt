@@ -1,18 +1,19 @@
 package com.example.chartit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public final class Charts{
 
    private static List<String> chartsTitle;
-   private static List<Chart> allCharts;
+   private static Map<String, Chart> allCharts;
 
-    public static List<Chart> getAllCharts() {
+    public static Map<String, Chart> getAllCharts() {
         if(allCharts==null)
         {
-            allCharts=new ArrayList<Chart>();
+            allCharts=new HashMap<>();
         }
         return allCharts;
     }
@@ -39,7 +40,7 @@ public final class Charts{
 
     public static void addChart(Chart chart) {
 
-        getAllCharts().add(chart);
+        getAllCharts().put(chart.getTitle(), chart);
     }
 
     public static Map<Integer, String> getChords(int i) {
