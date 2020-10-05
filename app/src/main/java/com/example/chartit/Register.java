@@ -21,6 +21,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
     EditText etFullName, etEmail, etPassword, etConfirmPassword;
@@ -28,6 +32,10 @@ public class Register extends AppCompatActivity {
     TextView tvLogin;
     FirebaseAuth fbAuth;
     ProgressBar progressBar;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
+    HashMap<String, Chart> defaultChart = new HashMap<>();
+    Chart chart = new Chart("new", null, null, null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,7 @@ public class Register extends AppCompatActivity {
 
         fbAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.register_progress_bar);
+        defaultChart.put("New", chart);
 
         if(fbAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -53,13 +62,20 @@ public class Register extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = etEmail.getText().toString().trim();
+                final String email = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
                 String confirmPassword = etConfirmPassword.getText().toString().trim();
+                final String fullName = etConfirmPassword.getText().toString().trim();
+
+                if(TextUtils.isEmpty(fullName)){
+                    etFullName.setError("Please enter your name");
+                    return;
+                }
                 if(TextUtils.isEmpty(email)){
                     etEmail.setError("Please enter your email");
                     return;
-                }  if(TextUtils.isEmpty(password)){
+                }
+                if(TextUtils.isEmpty(password)){
                     etPassword.setError("Please enter a password");
                     return;
                 }
@@ -71,6 +87,10 @@ public class Register extends AppCompatActivity {
                     etConfirmPassword.setError("Please enter the same password");
                     return;
                 }
+                rootNode = FirebaseDatabase.getInstance();
+                reference = rootNode.getReference("Users");
+                FireBaseHelperClass helperClass = new FireBaseHelperClass(fullName, email, defaultChart);
+                reference.setValue(helperClass);
                 progressBar.setVisibility(View.VISIBLE);
                 fbAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

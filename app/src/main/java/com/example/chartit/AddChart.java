@@ -26,7 +26,8 @@ public class AddChart extends AppCompatActivity {
     EditText etTitle, etVerse1, etVerse2;
     static Map allChartsDetails = new HashMap();
     Chart chartFromIntent;
-    Map selectedChordsList = new HashMap<Integer,String>();
+    Map selectedChordsList = new HashMap<Integer, String>();
+    String title, verse1, verse2;
 
 
     @Override
@@ -64,28 +65,31 @@ public class AddChart extends AppCompatActivity {
             AutoCompleteTextView eChord = (AutoCompleteTextView) findViewById(getResources().getIdentifier("chord" + i, "id", getPackageName()));
             eChord.setThreshold(1);
             eChord.setAdapter(adapter);
-            eChord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String item = adapterView.getItemAtPosition(i).toString();
-                    selectedChordsList.put(i,item);
-//                    Toast.makeText(AddChart.this, "this was was clicked " + item, Toast.LENGTH_LONG).show();
-                }
-            });
+//            eChord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                    String item = adapterView.getItemAtPosition(i).toString();
+//                    selectedChordsList.put(i, item);
+//                    Toast.makeText(AddChart.this, "you selected " + item + " at " + i, Toast.LENGTH_LONG).show();
+//                }
+//            });
             etChordsMap.put(i, eChord);
         }
         Intent intent = getIntent();
         chartFromIntent = (Chart) intent.getSerializableExtra("chart");
-        if (chartFromIntent != null && !chartFromIntent.isEmpty(chartFromIntent)) {
-            etTitle.setText(chartFromIntent.getTitle());
+        if (chartFromIntent != null) {// && !chartFromIntent.isEmpty(chartFromIntent)
+            title = etTitle.getText().toString();
+            verse1 = etVerse1.getText().toString();
+            verse2 = etVerse2.getText().toString();
+            intent.putExtra("title", title);
+            intent.putExtra("verse1", verse1);
+            intent.putExtra("verse2", verse2);
+//            etTitle.setText(chartFromIntent.getTitle());
             setEtChords((intent.getIntExtra("index", -1)));
-            etVerse1.setText(chartFromIntent.getVerse1());
-            etVerse2.setText(chartFromIntent.getVerse2());
+//            etVerse1.setText(chartFromIntent.getVerse1());
+//            etVerse2.setText(chartFromIntent.getVerse2());
+//            chartFromIntent = (Chart) intent.getSerializableExtra("chart");
         }
-//        else
-//        {
-//
-//        }
     }
     private void setEtChords(int i) {
         Map<Integer, String> etChordsBoard = Charts.getChords(i);
