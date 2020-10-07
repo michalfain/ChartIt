@@ -1,5 +1,6 @@
 package com.example.chartit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +11,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 public class ContactUs extends AppCompatActivity {
-    EditText etName, etEmail, etSubject, etMessage;
+    EditText etName, etSubject, etMessage;
+    String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,16 +29,27 @@ public class ContactUs extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         etName = findViewById(R.id.et_name);
-        etEmail = findViewById(R.id.et_email);
         etSubject = findViewById(R.id.et_subject);
         etMessage = findViewById(R.id.et_massage);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Constants.users).child(Constants.email);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userEmail = snapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 public void sendEmail(View v){
-        if(!etName.getText().toString().isEmpty() && !etEmail.getText().toString().isEmpty() &&
-        !etSubject.getText().toString().isEmpty() && !etMessage.getText().toString().isEmpty()){
-    String message = etName.getText().toString() + " " + etMessage.getText().toString() + " "
-            + etEmail.getText().toString();
+        if(!etName.getText().toString().isEmpty() && !etSubject.getText().toString().isEmpty() &&
+                !etMessage.getText().toString().isEmpty()){
+    String message = etName.getText().toString() + " " + etMessage.getText().toString() + userEmail;
     Intent intent = new Intent(Intent.ACTION_SEND);
     intent.putExtra(Intent.EXTRA_EMAIL, new String[]{Constants.myEmail});
     intent.putExtra(Intent.EXTRA_SUBJECT, etSubject.getText().toString());
@@ -37,7 +57,6 @@ public void sendEmail(View v){
     intent.setType("message/rfc822");
     startActivity(intent);
     etName.setText("");
-    etEmail.setText("");
     etSubject.setText("");
     etMessage.setText("");
             Toast.makeText(ContactUs.this, "Thank you for your feedback!", Toast.LENGTH_LONG).show();
