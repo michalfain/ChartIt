@@ -65,7 +65,7 @@ public class Register extends AppCompatActivity {
                 final String email = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
                 String confirmPassword = etConfirmPassword.getText().toString().trim();
-                final String fullName = etConfirmPassword.getText().toString().trim();
+                final String fullName = etFullName.getText().toString().trim();
 
                 if(TextUtils.isEmpty(fullName)){
                     etFullName.setError("Please enter your name");
