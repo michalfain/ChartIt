@@ -1,6 +1,7 @@
 package com.example.chartit;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 public class Chart  implements Serializable {
@@ -20,7 +21,7 @@ public class Chart  implements Serializable {
         this.verse2 = verse2;
     }
 
-    public void setChords(Map<Integer, String> chords) {
+    public void setChords(List<String> chords) {
         this.chords = chords;
     }
 
@@ -36,11 +37,11 @@ public class Chart  implements Serializable {
         return verse2;
     }
 
-    public Map<Integer, String> getChords() {
+    public List<String> getChords() {
         return chords;
     }
 
-    Chart(String title, String verse1, String verse2, Map<Integer, String> chords){
+    Chart(String title, String verse1, String verse2, List<String> chords){
         if(title != null) {
             this.title = title;
         }else
@@ -64,7 +65,7 @@ public class Chart  implements Serializable {
     private String title;
     private String verse1;
     private String verse2;
-    private Map<Integer, String> chords;
+    private List<String> chords;
 
     public boolean isEmpty(Chart chart)
     {

@@ -18,6 +18,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import java.util.HashSet;
@@ -45,7 +50,25 @@ public class ViewCharts extends AppCompatActivity {
 //            editor.putStringSet("Chart List", set2).apply();
 //            editor.commit();
 
-            final ListAdapter adapter = new ListAdapter(this, Charts.getChartsTitles());
+        final ListAdapter adapter = new ListAdapter(this, Charts.getChartsTitles());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Constants.users).child(Constants.userCharts);
+//        DatabaseReference listRef = reference.child(Constants.title);
+        reference.addValueEventListener(new ValueEventListener() {
+            //TODO circle thingi
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Charts.getChartsTitles().clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Charts.getChartsTitles().add(dataSnapshot.getKey());
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

@@ -11,9 +11,9 @@ public final class Charts{
    private static Map<String, Chart> allCharts;
 
     public static Map<String, Chart> getAllCharts() {
-        if(allCharts==null)
+        if(allCharts == null)
         {
-            allCharts=new HashMap<>();
+            allCharts = new HashMap<>();
         }
         return allCharts;
     }
@@ -43,7 +43,7 @@ public final class Charts{
         getAllCharts().put(chart.getTitle(), chart);
     }
 
-    public static Map<Integer, String> getChords(int i) {
+    public static List<String> getChords(int i) {
         return getAllCharts().get(i).getChords();
     }
 

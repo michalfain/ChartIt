@@ -17,9 +17,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +34,7 @@ public class AddChart extends AppCompatActivity {
     EditText etTitle, etVerse1, etVerse2;
     static Map allChartsDetails = new HashMap();
     Chart chartFromIntent;
-    Map selectedChordsList = new HashMap<Integer, String>();
+    List<String> selectedChordsList;
     String title, verse1, verse2;
     FirebaseAuth fbAuth;
     FirebaseDatabase rootNode;
@@ -49,6 +53,7 @@ public class AddChart extends AppCompatActivity {
         title = etTitle.getText().toString();
         verse1 = etVerse1.getText().toString();
         verse2 = etVerse2.getText().toString();
+        selectedChordsList  = new ArrayList<String>();
 
         String[] chords = {"C", "Cm", "Cdim", "Caug", "Cmaj7", "C7", "Cm7", "CmMaj7", "Cm7b5", "Cdim7",
                 "Cb", "Cbm", "Cbdim", "Cbaug", "Cbmaj7", "Cb7", "Cbm7", "CbmMaj7", "Cbm7b5", "Cbdim7",
@@ -81,8 +86,8 @@ public class AddChart extends AppCompatActivity {
 //                @Override
 //                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                    String item = adapterView.getItemAtPosition(i).toString();
-//                    selectedChordsList.put(i, item);
-//                    Toast.makeText(AddChart.this, "you selected " + item + " at " + i, Toast.LENGTH_LONG).show();
+//                    selectedChordsList.add(i, item);
+//                    Toast.makeText(AddChart.this, "you selected " + item + "at " + i, Toast.LENGTH_LONG).show();
 //                }
 //            });
             etChordsMap.put(i, eChord);
@@ -101,7 +106,7 @@ public class AddChart extends AppCompatActivity {
         }
     }
     private void setEtChords(int i) {
-        Map<Integer, String> etChordsBoard = Charts.getChords(i);
+        List<String> etChordsBoard = Charts.getChords(i);
         for(Integer index: etChordsMap.keySet())
         {
             etChordsMap.get(index).setText(etChordsBoard.get(index - 1));
@@ -139,14 +144,18 @@ switch (item.getItemId()){
             if (!etVerse2.getText().toString().isEmpty()) {
                 chart.setVerse2(etVerse2.getText().toString());
             }
+            for(Integer index : etChordsMap.keySet()){
+                selectedChordsList.add(index - 1, etChordsMap.get(index).getText().toString());
+            }
             chart.setChords(selectedChordsList);
             Charts.addTitle(chart.getTitle());
             Charts.addChart(chart);
             allChartsDetails.put(chart.getTitle(), chart);
 
+
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference(Constants.users).child(Constants.userCharts);
-            reference.setValue(chart);
+            reference.setValue(Charts.getAllCharts());
             Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
         }
         else {
