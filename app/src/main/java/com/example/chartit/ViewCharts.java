@@ -48,6 +48,7 @@ public class ViewCharts extends AppCompatActivity {
                 Charts.getChartsTitles().clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Charts.getChartsTitles().add(dataSnapshot.getKey());
+                    Charts.getAllCharts().put(dataSnapshot.getKey(), dataSnapshot.getValue());
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -61,22 +62,12 @@ public class ViewCharts extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                    reference.addValueEventListener(new ValueEventListener() {
-////                        @Override
-////                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-////
-////                        }
-////
-////                        @Override
-////                        public void onCancelled(@NonNull DatabaseError error) {
-////
-////                        }
-////                    });
                     Intent intent = new Intent(ViewCharts.this, AddChart.class);
-//                    intent.putExtra(Constants.index, i);
-//                    intent.putExtra(Constants.title, Charts.getTitle(i));
-//                    intent.putExtra(Constants.verse1, Charts.getVerse1(i));
-//                    intent.putExtra(Constants.verse2, Charts.getVerse2(i));
+                    intent.putExtra(Constants.index, i);
+                    String title = Charts.getTitle(i);
+                    intent.putExtra(Constants.title, title);
+                    intent.putExtra(Constants.verse1, Charts.getVerse1(title));
+                    intent.putExtra(Constants.verse2, Charts.getVerse2(title));
                     startActivity(intent);
                 }
             });

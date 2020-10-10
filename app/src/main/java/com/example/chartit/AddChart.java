@@ -28,14 +28,12 @@ public class AddChart extends AppCompatActivity {
     public static Map<Integer, AutoCompleteTextView> etChordsMap = new HashMap<>();
     EditText etTitle, etVerse1, etVerse2;
     static Map allChartsDetails = new HashMap();
-//    Chart chartFromIntent;
     List<String> selectedChordsList;
     String title, verse1, verse2;
     String titleFormIntent, verse1FromIntent, verse2FromIntent;
     FirebaseAuth fbAuth;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-
 
 
     @Override
@@ -81,23 +79,14 @@ public class AddChart extends AppCompatActivity {
             etChordsMap.put(i, eChord);
         }
         Intent intent = getIntent();
-//        chartFromIntent = (Chart) intent.getSerializableExtra(Constants.userCharts);
-//        if (chartFromIntent != null) {
-        titleFormIntent = intent.putExtra(Constants.title, title).toString();
+        titleFormIntent = intent.getStringExtra(Constants.title);
         etTitle.setText(titleFormIntent);
-//            intent.putExtra(Constants.verse1, verse1);
-//            intent.putExtra(Constants.verse2, verse2);
-//            setEtChords((intent.getIntExtra(Constants.index, -1)));
-//        }
+        verse1FromIntent = intent.getStringExtra(Constants.verse1);
+        etVerse1.setText(verse1FromIntent);
+        verse2FromIntent = intent.getStringExtra(Constants.verse2);
+        etVerse2.setText(verse2FromIntent);
+            setEtChords(titleFormIntent);
     }
-//    private void setEtChords(int i) {
-//        List<String> etChordsBoard = Charts.getChords(i);
-//        for(Integer index: etChordsMap.keySet())
-//        {
-//            etChordsMap.get(index).setText(etChordsBoard.get(index - 1));
-//        }
-//
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -140,20 +129,21 @@ switch (item.getItemId()){
 
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference(Constants.users).child(Constants.userCharts);
-            reference.setValue(Charts.getAllCharts());
+            reference.updateChildren(Charts.getAllCharts());
             Toast.makeText(AddChart.this, "Chart was saved!", Toast.LENGTH_LONG).show();
         }
         else {
             Toast.makeText(AddChart.this, "Please enter chart's title", Toast.LENGTH_LONG).show();
         }
     }
+        private void setEtChords(String title) {
+        List<String> etChordsBoard = Charts.getChords(title);
+        for(Integer index: etChordsMap.keySet())
+        {
+            etChordsMap.get(index).setText(etChordsBoard.get(index - 1));
+        }
 
-//    private void populateEtChords(List etChords) {
-//        for(AutoCompleteTextView etChord:etChordsMap.values())
-//        {
-//            etChords.add(etChord.getText());
-//        }
-//    }
+    }
 
     private void resetChart(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddChart.this);

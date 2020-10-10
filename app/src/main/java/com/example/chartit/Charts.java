@@ -8,9 +8,9 @@ import java.util.Map;
 public final class Charts{
 
    private static List<String> chartsTitle;
-   private static Map<String, Chart> allCharts;
+   private static Map<String, Object> allCharts;
 
-    public static Map<String, Chart> getAllCharts() {
+    public static Map<String, Object> getAllCharts() {
         if(allCharts == null)
         {
             allCharts = new HashMap<>();
@@ -43,15 +43,15 @@ public final class Charts{
         getAllCharts().put(chart.getTitle(), chart);
     }
 
-    public static List<String> getChords(int i) {
-        return getAllCharts().get(i).getChords();
+    public static List<String> getChords(String title) {
+        return (List)((Map)(getAllCharts().get(title))).get(Constants.chords);
     }
 
-    public static String getVerse1(int i) {
-        return getAllCharts().get(i).getVerse1();
+    public static String getVerse1(String title) {
+        return ((Map)(getAllCharts().get(title))).get(Constants.verse1).toString();
     }
 
-    public static String getVerse2(int i) {
-        return getAllCharts().get(i).getVerse2();
+    public static String getVerse2(String title) {
+        return ((Map)(getAllCharts().get(title))).get(Constants.verse2).toString();
     }
 }
