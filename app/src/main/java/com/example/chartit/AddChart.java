@@ -9,19 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,9 +28,10 @@ public class AddChart extends AppCompatActivity {
     public static Map<Integer, AutoCompleteTextView> etChordsMap = new HashMap<>();
     EditText etTitle, etVerse1, etVerse2;
     static Map allChartsDetails = new HashMap();
-    Chart chartFromIntent;
+//    Chart chartFromIntent;
     List<String> selectedChordsList;
     String title, verse1, verse2;
+    String titleFormIntent, verse1FromIntent, verse2FromIntent;
     FirebaseAuth fbAuth;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
@@ -82,37 +78,26 @@ public class AddChart extends AppCompatActivity {
             AutoCompleteTextView eChord = (AutoCompleteTextView) findViewById(getResources().getIdentifier("chord" + i, "id", getPackageName()));
             eChord.setThreshold(1);
             eChord.setAdapter(adapter);
-//            eChord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                    String item = adapterView.getItemAtPosition(i).toString();
-//                    selectedChordsList.add(i, item);
-//                    Toast.makeText(AddChart.this, "you selected " + item + "at " + i, Toast.LENGTH_LONG).show();
-//                }
-//            });
             etChordsMap.put(i, eChord);
         }
         Intent intent = getIntent();
-        chartFromIntent = (Chart) intent.getSerializableExtra(Constants.userCharts);
-        if (chartFromIntent != null) {// && !chartFromIntent.isEmpty(chartFromIntent)
-            intent.putExtra(Constants.title, title);
-            intent.putExtra(Constants.verse1, verse1);
-            intent.putExtra(Constants.verse2, verse2);
-//            etTitle.setText(chartFromIntent.getTitle());
-            setEtChords((intent.getIntExtra(Constants.index, -1)));
-//            etVerse1.setText(chartFromIntent.getVerse1());
-//            etVerse2.setText(chartFromIntent.getVerse2());
-//            chartFromIntent = (Chart) intent.getSerializableExtra("chart");
-        }
+//        chartFromIntent = (Chart) intent.getSerializableExtra(Constants.userCharts);
+//        if (chartFromIntent != null) {
+        titleFormIntent = intent.putExtra(Constants.title, title).toString();
+        etTitle.setText(titleFormIntent);
+//            intent.putExtra(Constants.verse1, verse1);
+//            intent.putExtra(Constants.verse2, verse2);
+//            setEtChords((intent.getIntExtra(Constants.index, -1)));
+//        }
     }
-    private void setEtChords(int i) {
-        List<String> etChordsBoard = Charts.getChords(i);
-        for(Integer index: etChordsMap.keySet())
-        {
-            etChordsMap.get(index).setText(etChordsBoard.get(index - 1));
-        }
-
-    }
+//    private void setEtChords(int i) {
+//        List<String> etChordsBoard = Charts.getChords(i);
+//        for(Integer index: etChordsMap.keySet())
+//        {
+//            etChordsMap.get(index).setText(etChordsBoard.get(index - 1));
+//        }
+//
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -163,12 +148,12 @@ switch (item.getItemId()){
         }
     }
 
-    private void populateEtChords(List etChords) {
-        for(AutoCompleteTextView etChord:etChordsMap.values())
-        {
-            etChords.add(etChord.getText());
-        }
-    }
+//    private void populateEtChords(List etChords) {
+//        for(AutoCompleteTextView etChord:etChordsMap.values())
+//        {
+//            etChords.add(etChord.getText());
+//        }
+//    }
 
     private void resetChart(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddChart.this);
