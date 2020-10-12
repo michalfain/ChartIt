@@ -24,7 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Register extends AppCompatActivity {
     EditText etFullName, etEmail, etPassword, etConfirmPassword;
@@ -34,8 +36,6 @@ public class Register extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-    HashMap<String, Chart> defaultChart = new HashMap<>();
-    Chart chart = new Chart("new", null, null, null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,6 @@ public class Register extends AppCompatActivity {
 
         fbAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.register_progress_bar);
-        defaultChart.put("New", chart);
 
         if(fbAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -89,7 +88,7 @@ public class Register extends AppCompatActivity {
                 }
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference(Constants.users);
-                FireBaseHelperClass helperClass = new FireBaseHelperClass(fullName, email, defaultChart);
+                FireBaseHelperClass helperClass = new FireBaseHelperClass(fullName, email);
                 reference.setValue(helperClass);
                 progressBar.setVisibility(View.VISIBLE);
                 fbAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

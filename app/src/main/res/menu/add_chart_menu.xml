@@ -10,4 +10,8 @@
     android:id="@+id/reset"
     android:title="Reset"
     app:showAsAction="always" />
+    <item
+    android:id="@+id/preview"
+    android:title="PreView"
+    app:showAsAction="always" />
 </menu>

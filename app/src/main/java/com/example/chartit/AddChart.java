@@ -30,7 +30,7 @@ public class AddChart extends AppCompatActivity {
     static Map allChartsDetails = new HashMap();
     List<String> selectedChordsList;
     String title, verse1, verse2;
-    String titleFormIntent, verse1FromIntent, verse2FromIntent;
+    String titleFromIntent, verse1FromIntent, verse2FromIntent;
     FirebaseAuth fbAuth;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
@@ -79,13 +79,15 @@ public class AddChart extends AppCompatActivity {
             etChordsMap.put(i, eChord);
         }
         Intent intent = getIntent();
-        titleFormIntent = intent.getStringExtra(Constants.title);
-        etTitle.setText(titleFormIntent);
+        titleFromIntent = intent.getStringExtra(Constants.title);
+        etTitle.setText(titleFromIntent);
         verse1FromIntent = intent.getStringExtra(Constants.verse1);
         etVerse1.setText(verse1FromIntent);
         verse2FromIntent = intent.getStringExtra(Constants.verse2);
         etVerse2.setText(verse2FromIntent);
-            setEtChords(titleFormIntent);
+        if(titleFromIntent != null) {
+            setEtChords(titleFromIntent);
+        }
     }
 
     @Override
@@ -103,6 +105,10 @@ switch (item.getItemId()){
 
     case R.id.reset:
         resetChart();
+        break;
+
+    case R.id.preview:
+        showPreview();
         break;
 }
         return super.onOptionsItemSelected(item);
@@ -170,5 +176,9 @@ switch (item.getItemId()){
         {
             etChord.setText("");
         }
+    }
+    private void showPreview(){
+        Intent intent = new Intent(AddChart.this, PreviewChart.class);
+        startActivity(intent);
     }
 }
