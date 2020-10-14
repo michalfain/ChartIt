@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -144,7 +145,7 @@ switch (item.getItemId()){
     }
         private void setEtChords(String title) {
         List<String> etChordsBoard = Charts.getChords(title);
-        for(Integer index: etChordsMap.keySet())
+        for(Integer index : etChordsMap.keySet())
         {
             etChordsMap.get(index).setText(etChordsBoard.get(index - 1));
         }
@@ -179,6 +180,10 @@ switch (item.getItemId()){
     }
     private void showPreview(){
         Intent intent = new Intent(AddChart.this, PreviewChart.class);
+        intent.putExtra(Constants.title, titleFromIntent);
+        intent.putExtra(Constants.verse1, verse1FromIntent);
+        intent.putExtra(Constants.verse2, verse2FromIntent);
+//        intent.putExtra(Constants.chords, (Parcelable) Charts.getChords(titleFromIntent));
         startActivity(intent);
     }
 }

@@ -47,7 +47,7 @@ public class ContactUs extends AppCompatActivity {
 public void sendEmail(View v){
         if(!etName.getText().toString().isEmpty() && !etSubject.getText().toString().isEmpty() &&
                 !etMessage.getText().toString().isEmpty()){
-    String message = etName.getText().toString() + " " + etMessage.getText().toString() + userEmail;
+    String message = etName.getText().toString() + " " + etMessage.getText().toString() + " " + userEmail;
     Intent intent = new Intent(Intent.ACTION_SEND);
     intent.putExtra(Intent.EXTRA_EMAIL, new String[]{Constants.myEmail});
     intent.putExtra(Intent.EXTRA_SUBJECT, etSubject.getText().toString());
