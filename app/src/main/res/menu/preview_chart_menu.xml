@@ -5,5 +5,9 @@
         android:id="@+id/pdf"
         android:title="Convert to PDF"
         app:showAsAction="always" />
+    <!--item
+        android:id="@+id/open"
+        android:title="Open Pdf"
+        app:showAsAction="always" /-->
 
 </menu>
